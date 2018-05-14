@@ -4,47 +4,48 @@
 #include <fstream>
 #include"Final-Project.hpp"
 #include <queue>
+#include<set>
 using Level = std::vector< std::string >;
   
+    struct queueNode
+    {
+       Block up ;
+       Block down ;
+       Block right ;
+       Block left ;
+       char cell ;
+    };
+
+ 
+  char breadthFirst(Level level ,  Location Start , Location Target , Location loc , Block block ) 
+   {   std::set<Location>visit ;
+     std:: queue<queueNode> q ;
+      Start = getStartLocation(  level ,loc ) ;
+      Target = getTargetLocation( level , loc) ;
+      queueNode start = {Start , 'S'} ;
+      queueNode target = {Target , 'T'} ;
+     q.push(start) ;
   
-  struct Elements
-  { 
-     Level level ;
-     Location loc ;
-    char Validelement =  getLevelElement(  level ,  loc ) ;
-     Elements*left ;
-     Elements*right ;
-  };
-  Elements*create()
-  {
-     return nullptr;
-  }
-  
-  void breadthFirst(Elements*element) 
-   {
-     std:: queue<Elements*> queue ;
-   Elements *current = element ;
-   
-  if(current == nullptr) return ;
-   queue.push(current) ;
-  
-  while (! queue.empty())
-  {   current = queue.front() ;
-      queue.pop();
-     std::cout<< current -> Validelement << std::endl; 
-      
-     if(current -> left != nullptr)
-    {   
-    
-      queue.push(current -> left) ;
-     
-    }
-     if(current -> right != nullptr)
-    {   
-     
-      queue.push(current -> right) ;
-     
-    }
-    
+  while (! q.empty())
+  {   
+      for (int i=0 ; i< level.size() ; i++)
+      {
+          queueNode current = start ;
+       current = q.front() ;
+       q.pop(); 
+      if ((!visit.find)&& isValidElement(level ,loc ))
+      {
+          visit.insert ;
+         current.up = moveUp(block );
+         current.down = moveDown(block );
+         current.right = moveRight(block );
+         current.left = moveLeft(block );
+         if (current = target)
+         {
+             return current ;
+         }
+         
+      }
+      }
   }
 }
